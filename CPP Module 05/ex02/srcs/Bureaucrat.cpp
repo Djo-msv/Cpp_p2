@@ -1,4 +1,4 @@
-#include "Form.hpp"
+#include "AForm.hpp"
 
 Bureaucrat::Bureaucrat(void)
 {}
@@ -13,7 +13,7 @@ Bureaucrat::Bureaucrat(const std::string &name, uint8_t grade) : _name(name)
 	_grade = grade;
 }
 
-Bureaucrat::Bureacrat(const Bureaucrat &value) : _name(value.getName()), _grade(value.getGrade())
+Bureaucrat::Bureaucrat(const Bureaucrat &value) : _name(value.getName()), _grade(value.getGrade())
 {}
 
 Bureaucrat::~Bureaucrat(void)
@@ -43,7 +43,7 @@ void	Bureaucrat::decrementGrade(void)
 	_grade--;
 }
 
-void	Bureaucrat::signForm(Form value)
+void	Bureaucrat::signForm(AForm &value)	
 {
 	try
 	{
@@ -56,7 +56,16 @@ void	Bureaucrat::signForm(Form value)
 	}
 }
 
-Bureaucrat operator=(const Bureaucrat &value)
+void	Bureaucrat::executeForm(AForm const &form)
+{
+	form.execute(*this);
+	if (form.getSign() == 0 || getGrade() > form.getGradeToExecute())
+		std::cout << _name << " can't executed " << form.getName() << std::endl;
+	else
+		std::cout << _name << " executed " << form.getName() << std::endl;
+}
+
+Bureaucrat &Bureaucrat::operator=(const Bureaucrat &value)
 {
 	(void)value;
 	return (*this);

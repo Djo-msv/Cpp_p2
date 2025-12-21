@@ -1,13 +1,20 @@
 #pragma once
 
+#include <iostream>
+#include <fstream> 
+
+#include "AForm.hpp"
+
 class ShrubberyCreationForm : public AForm
 {
 	public :
 		ShrubberyCreationForm();
-		ShrubberyCreationForm(const ShruvveryCreationForm &value);
-		~ShrubberyCreationForm();
+		ShrubberyCreationForm(const std::string &name);
+		ShrubberyCreationForm(const ShrubberyCreationForm &value);
+		virtual ~ShrubberyCreationForm();
 		
-		virtual void execution(Bureaucrat const &executor);
+		void execute(Bureaucrat const &executor) const;
+
+		ShrubberyCreationForm &operator=(const ShrubberyCreationForm &value);
 };
 
-ShrubberyCreationForm operator=(const ShrubberyCreationForm &value);

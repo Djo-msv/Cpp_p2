@@ -46,7 +46,7 @@ BUILD_DIR	:=	.build
 SRCS_FILES	:=	main.cpp \
 				AForm.cpp \
 				Bureaucrat.cpp \
-				PresidentilalPardonForm.cpp \
+				PresidentialPardonForm.cpp \
 				RobotomyRequestForm.cpp \
 				ShrubberyCreationForm.cpp
 

@@ -1,19 +1,45 @@
 #include "ShrubberyCreationForm.hpp"
 
-ShubberyCreationForm::ShubberyCreationForm(void) : AForm("defaut", 25, 5)
+ShrubberyCreationForm::ShrubberyCreationForm(void) : AForm("defaut", 25, 5)
 {}
 
-ShubberyCreationForm::ShubberyCreationForm(const std::string &name) : AForm(name, 25, 5)
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &name) : AForm(name, 25, 5)
 {}
 
-ShubberyCreationForm::ShubberyCreationForm(const ShubberyCreationForm &value)
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &value) : AForm(value)
 {}
 
-ShubberyCreationForm::~ShubberyCreationForm(void)
+ShrubberyCreationForm::~ShrubberyCreationForm(void)
 {}
 
-ShubberyCreationForm &operator=(const ShubberyCreationForm &value)
+void	printAsciiTree(const std::string &fileName)
+{
+	std::ofstream outfile (fileName.c_str());
+
+	outfile << "        _-_" << std::endl;
+	outfile << "     /~~   ~~\\" << std::endl;
+	outfile << "   /~~      ~~\\" << std::endl;
+	outfile << " /~~         ~~\\" << std::endl;
+	outfile << "{               }" << std::endl;
+	outfile << " \\  _-     -_  /" << std::endl;
+	outfile << "   ~  \\\\ //  ~" << std::endl;
+	outfile << "_- -   | | _- _" << std::endl;
+	outfile << "  _ -  | |   -_" << std::endl;
+	outfile << "      // \\\\" << std::endl;
+
+	outfile.close();
+}
+
+void ShrubberyCreationForm::execute(const Bureaucrat &value) const
+{
+//	if (getSign() == 0 || value.getGrade() > getGradeToExecute())
+//		return ;
+
+	printAsciiTree(value.getName() + "_shrubbery");
+}
+
+ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm &value)
 {
 	(void)value;
-	return ;
+	return (*this);
 }

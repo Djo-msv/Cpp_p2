@@ -1,13 +1,16 @@
 #pragma once
 
+#include "AForm.hpp"
+
 class RobotomyRequestForm : public AForm
 {
 	public :
-		RobotmyRequestForm();
-		RobotomyRequestFor(const RobotomyRequestForm &value);
-		~RobotmyRequestForm();
+		RobotomyRequestForm();
+		RobotomyRequestForm(const std::string &name);
+		RobotomyRequestForm(const RobotomyRequestForm &value);
+		virtual ~RobotomyRequestForm();
 
-		virtual void execution(Bureaucrat const &executor);
+		void execute(Bureaucrat const &executor) const;
 
-		RobotomyRequestFor operator=(const RobotomyRequestFor &value);
+		RobotomyRequestForm &operator=(const RobotomyRequestForm &value);
 };
