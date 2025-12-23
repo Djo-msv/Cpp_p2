@@ -1,4 +1,4 @@
-NAME	:= ...
+NAME	:= At_least_this_beats_coffee-making
 MAKEFLAGS += --no-print-directory
 
 #==============================COMPIL===========================#
@@ -43,7 +43,13 @@ BUILD_DIR	:=	.build
 
 #==============================SOURCES===========================#
 
-SRCS_FILES	:=	
+SRCS_FILES	:=	main.cpp \
+				AForm.cpp \
+				Bureaucrat.cpp \
+				Intern.cpp \
+				PresidentialPardonForm.cpp \
+				RobotomyRequestForm.cpp \
+				ShrubberyCreationForm.cpp
 
 SRCS	:=		$(addprefix $(SRC_DIR)/, $(SRCS_FILES))
 
