@@ -31,12 +31,12 @@ AForm	*callPresidentialPardonFormConstructor(std::string target)
 
 AForm	*Intern::makeForm(const std::string &name, const std::string &target)
 {
-	std::string	Form[] = {"ShrubberyCreationForm", "RobotomyRequestForm", "PresidentialPardonForm", NULL};
-	AForm*    (*_ptr[4])(std::string) = {&callShrubberyCreationFormConstructor, &callShrubberyCreationFormConstructor, &callPresidentialPardonFormConstructor, NULL};
+	std::string	Form[] = {"ShrubberyCreationForm", "RobotomyRequestForm", "PresidentialPardonForm"};
+	AForm*    (*_ptr[3])(std::string) = {&callShrubberyCreationFormConstructor, &callRobotomyRequestFormConstructor, &callPresidentialPardonFormConstructor};
 
 	int i;
 
 	for (i = 0; i != 3 && name != Form[i]; i++)
 		continue ;
-	return (i != 3 ? NULL : _ptr[i](target));
+	return (i == 3 ? NULL : _ptr[i](target));
 }

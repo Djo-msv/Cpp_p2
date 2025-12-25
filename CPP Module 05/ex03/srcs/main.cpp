@@ -3,18 +3,19 @@
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "AForm.hpp"
-
-
+#include "Intern.hpp"
 
 int	main(void)
 {
-	Bureaucrat	chr1("Paul", 150);	
+	Intern someRandomIntern;
+	Bureaucrat B("Charles", 1);
+	AForm* rrf = NULL;
 
-	PresidentialPardonForm Henry("Henry");
+	rrf = someRandomIntern.makeForm("RobotomyRequestForm", "Bender");
+	if (!rrf)
+		return (-1);
+	B.signForm(*rrf);
+	rrf->execute(B);
 
-	chr1.signForm(Henry);
-
-	chr1.executeForm(Henry);
-
-	return (0);
+	delete rrf;
 }
