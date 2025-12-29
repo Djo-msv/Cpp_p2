@@ -1,4 +1,4 @@
-NAME	:= ...
+NAME	:= Conversion_of_scalar_types
 MAKEFLAGS += --no-print-directory
 
 #==============================COMPIL===========================#
@@ -43,7 +43,8 @@ BUILD_DIR	:=	.build
 
 #==============================SOURCES===========================#
 
-SRCS_FILES	:=
+SRCS_FILES	:=	main.cpp \
+				ScalarConverter.cpp
 
 SRCS	:=		$(addprefix $(SRC_DIR)/, $(SRCS_FILES))
 
