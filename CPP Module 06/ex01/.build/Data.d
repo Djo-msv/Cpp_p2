@@ -1,0 +1,3 @@
+.build/Data.o: srcs/Data.cpp includes/Data.hpp
+
+includes/Data.hpp:

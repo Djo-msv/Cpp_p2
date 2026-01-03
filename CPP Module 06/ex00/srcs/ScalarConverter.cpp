@@ -39,9 +39,6 @@ void	convert_float(float value)
 	print_double(static_cast<double>(value));
 }
 
-void	error_convert(void)
-{}
-
 void	convert_double(double value)
 {
 	if (value > 129 || value < 0)
@@ -66,6 +63,8 @@ void ScalarConverter::Convert(std::string &value)
 		convert_float(atof(value.c_str()));
 	else if (is_double(value))
 		convert_double(atof(value.c_str()));
+	else if (is_exeption(value))
+		print_exeption();
 	else
-		error_convert();
+		print_error();
 }

@@ -10,8 +10,5 @@ void	print_char(char value);
 void	print_int(int value);
 void	print_float(float value);
 void	print_double(double value);
-
-void	print_nan(void);
-void	print_inf(void);
-void	print_neginf(void);
+void	print_exeption(void);
 void	print_error(void);

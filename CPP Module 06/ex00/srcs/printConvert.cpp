@@ -53,6 +53,14 @@ void	print_neginf(void)
 	std::cout << "double: -inf" << std::endl;
 }
 
+void	print_exeption(void)
+{
+	std::cout << "char: impossible" << std::endl;
+	std::cout << "int: impossible" << std::endl;
+	std::cout << "float: nanf" << std::endl;
+	std::cout << "double: nan" << std::endl;
+}
+
 void	print_error(void)
 {
 	std::cout << "char: impossible" << std::endl;
