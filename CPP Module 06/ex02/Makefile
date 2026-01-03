@@ -1,4 +1,4 @@
-NAME	:= ...
+NAME	:= IdentifyRealType
 MAKEFLAGS += --no-print-directory
 
 #==============================COMPIL===========================#
@@ -43,7 +43,9 @@ BUILD_DIR	:=	.build
 
 #==============================SOURCES===========================#
 
-SRCS_FILES	:=	
+SRCS_FILES	:=	main.cpp \
+				Base.cpp \
+				IdentifyRealType.cpp
 
 SRCS	:=		$(addprefix $(SRC_DIR)/, $(SRCS_FILES))
 
