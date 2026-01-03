@@ -44,7 +44,9 @@ BUILD_DIR	:=	.build
 #==============================SOURCES===========================#
 
 SRCS_FILES	:=	main.cpp \
-				ScalarConverter.cpp
+				parsing.cpp \
+				printConvert.cpp \
+				ScalarConverter.cpp \
 
 SRCS	:=		$(addprefix $(SRC_DIR)/, $(SRCS_FILES))
 

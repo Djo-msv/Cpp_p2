@@ -1,65 +1,71 @@
 #include "ScalarConverter.hpp"
+#include "printConvert.hpp"
+#include "parsing.hpp"
 
-void	printInt(bool isPrintable, int nbDigit, const std::string &value)
+void	convert_int(int value)
 {
-	long	integer;
+	if (value > 128 || value < 0)
+		std::cout << "char: impossible" << std::endl;
+	else
+		print_char(static_cast<char>(value));
+	print_int(value);
+	print_float(static_cast<float>(value));
+	print_double(static_cast<double>(value));
+}
 
-	integer = atol(value.c_str());
-	if (isPrintable && (nbDigit > 11 || (integer > MAX_INT || integer < MIN_INT) || nbDigit == 0))
-		isPrintable = 0;
-	if (isPrintable)
-		std::cout << "int: " << static_cast<int>(integer) << std::endl;
+void	convert_char(char value)
+{
+	if (value < 0)
+		std::cout << "char: impossible" << std::endl;
+	else
+		print_char(value);
+	print_int(static_cast<int>(value));
+	print_float(static_cast<float>(value));
+	print_double(static_cast<double>(value));
+}
+
+void	convert_float(float value)
+{
+	if (value > 129 || value < 0)
+		std::cout << "char: impossible" << std::endl;
+	else
+		print_char(static_cast<char>(value));
+	if (value < (double)MAX_INT + 1 && value > MIN_INT)
+		print_int(static_cast<int>(value));
 	else
 		std::cout << "int: impossible" << std::endl;
+	print_int(static_cast<int>(value));
+	print_float(value);
+	print_double(static_cast<double>(value));
 }
 
-void	parsInt(const std::string &value)
-{
-	int	nbComma = 0;
-	int	nbDigit = 0;
-	std::string::const_iterator	it;
+void	error_convert(void)
+{}
 
-	for (it = value.begin(); it != value.end(); it++)
-	{
-		if ((static_cast<char>(*it) == '-' || static_cast<char>(*it) == '+') && it == value.begin())
-			it++;
-		else if (static_cast<char>(*it) == 'f')
-		{
-			it++;
-			break ;
-		}
-		if (!std::isdigit(*it) && static_cast<char>(*it) != '.')
-				break ;
-		if (static_cast<char>(*it) == '.')
-			nbComma++;
-		if (nbComma > 1)
-			break ;
-		if (nbComma == 0)
-			nbDigit++;
-	}
-	printInt(it == value.end() && static_cast<char>(*(--it)) != '.', nbDigit, value);
+void	convert_double(double value)
+{
+	if (value > 129 || value < 0)
+		std::cout << "char: impossible" << std::endl;
+	else
+		print_char(static_cast<char>(value));
+	if (value < (double)MAX_INT + 1 && value > MIN_INT)
+		print_int(static_cast<int>(value));
+	else
+		std::cout << "int: impossible" << std::endl;
+	print_float(static_cast<float>(value));
+	print_double(value);
 }
 
-double	parsValue(const std::string &value)
+void ScalarConverter::Convert(std::string &value)
 {
-	if (value.size() == 1)
-		return (static_cast<double>(value[0]));
-	if (value == "nan" || value == "nanf")
-		return (static_cast<double>(nan("")));
-	std::ostringstream oss;
-	oss << atof(value.c_str());
-	if (oss.str() == value || oss.str() == value + "f")
-		return (atof(value.c_str()));
-	return (0.0f);
-}
-
-void ScalarConverter::Convert(const std::string &value)
-{
-	double dValue = parsValue(value);
-
-	std::cout << dValue << std::endl;
-//	parsInt(value);
-//	std::cout << "int    : " << atoi(charValue) << std::endl;
-//	std::cout << "float  : " << static_cast<float>(atof(charValue)) << std::endl;
-//	std::cout << "double : " << atof(charValue) << std::endl;
+	if (is_int(value))
+		convert_int(atoi(value.c_str()));
+	else if (is_char(&value))
+		convert_char(value[0]);
+	else if (is_float(value))
+		convert_float(atof(value.c_str()));
+	else if (is_double(value))
+		convert_double(atof(value.c_str()));
+	else
+		error_convert();
 }

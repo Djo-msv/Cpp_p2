@@ -1,4 +1,5 @@
 #include "ScalarConverter.hpp"
+#include <iomanip>
 
 int main(int argc, char **argv)
 {
@@ -7,7 +8,9 @@ int main(int argc, char **argv)
 
 	std::string	value(argv[1]);
 
+	std::cout << std::setprecision (64);
 	std::cout << "input value : " << value << std::endl;
+
 	ScalarConverter::Convert(value);
 	return (0);
 }
