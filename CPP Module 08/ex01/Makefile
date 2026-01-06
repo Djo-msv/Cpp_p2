@@ -1,4 +1,4 @@
-NAME	:= ...
+NAME	:= Span
 MAKEFLAGS += --no-print-directory
 
 #==============================COMPIL===========================#
@@ -43,7 +43,8 @@ BUILD_DIR	:=	.build
 
 #==============================SOURCES===========================#
 
-SRCS_FILES	:=	
+SRCS_FILES	:=	main.cpp \
+				Span.cpp
 
 SRCS	:=		$(addprefix $(SRC_DIR)/, $(SRCS_FILES))
 
