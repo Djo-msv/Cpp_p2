@@ -1,4 +1,4 @@
-NAME	:= Array
+NAME	:= Iter
 MAKEFLAGS += --no-print-directory
 
 #==============================COMPIL===========================#
