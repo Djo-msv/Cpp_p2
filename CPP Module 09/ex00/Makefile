@@ -1,4 +1,4 @@
-NAME	:= ...
+NAME	:= btc
 MAKEFLAGS += --no-print-directory
 
 #==============================COMPIL===========================#
@@ -8,6 +8,10 @@ CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 ifeq ($(DEBUG), 1)
 	CFLAGS += -g
+endif
+
+ifeq ($(VERBOSE), 1)
+	CFLAGS += -D VERBOSE=1
 endif
 
 #==============================COLORS==============================#
@@ -43,7 +47,8 @@ BUILD_DIR	:=	.build
 
 #==============================SOURCES===========================#
 
-SRCS_FILES	:=
+SRCS_FILES	:=	main.cpp \
+			BitcoinExchange.cpp
 
 SRCS	:=		$(addprefix $(SRC_DIR)/, $(SRCS_FILES))
 
