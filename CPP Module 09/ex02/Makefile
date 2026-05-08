@@ -1,9 +1,9 @@
-NAME	:= ...
+NAME	:= pMergeMe
 MAKEFLAGS += --no-print-directory
 
 #==============================COMPIL===========================#
 
-CC = c++
+CC = g++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 ifeq ($(DEBUG), 1)
