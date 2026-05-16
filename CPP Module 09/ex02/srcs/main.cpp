@@ -22,4 +22,7 @@ int	main(int argc, char **argv)
 		}
 	}
 	pMergeMeSetup(&S);
+	for (std::vector<long long>::iterator it = S.begin(); it != S.end(); it++)
+		std::cout << *it << ' ';
+	std::cout << std::endl;
 }
