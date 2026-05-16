@@ -21,25 +21,24 @@ void	sortPair(std::vector<Object*> *S)
 void	insert(std::vector<Object*> *S, Object *value, size_t i)
 {
 	size_t	begin = 0;
-	size_t	end = i + 1;
+	size_t	end = i;
 	size_t	mid;
 	std::vector<Object*>::iterator it = S->begin();
 
-	while (true) {
+	while (begin <= end) {
 		mid = (end - begin) / 2 + begin;
-		if (value->x > (*S)[mid]->x)
-			begin = mid;
-		else if (value->x < (*S)[mid]->x)
-			end = begin;
-		else {
+		if ((*S)[mid]->x == value->x) {
 			S->insert(it + mid, value);
-			break;
+			return ;
 		}
-		if (begin == end) {
-			S->insert(it + mid, value);
-			break;
-		}
+		else 
+			((*S)[mid]->x > value->x)? end = mid - 1: begin = mid + 1;
 	}
+	if ((*S)[mid]->x < value->x)
+		S->insert(it + mid + 1, value);
+	if ((*S)[mid]->x > value->x)
+		S->insert(it + mid, value);
+
 }
 
 void	createFordJohnsonSuite(std::vector<Object*> *S, std::vector<Object *> *s)
