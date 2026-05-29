@@ -40,3 +40,10 @@ AForm	*Intern::makeForm(const std::string &name, const std::string &target)
 		continue ;
 	return (i == 3 ? NULL : _ptr[i](target));
 }
+
+
+Intern& Intern::operator=(const Intern &value)
+{
+	(void)value;
+	return (*this);
+}

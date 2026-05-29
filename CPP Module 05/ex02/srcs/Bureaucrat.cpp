@@ -52,7 +52,8 @@ void	Bureaucrat::signForm(AForm &value)
 	}
 	catch (std::exception &e)
 	{
-		std::cout << _name << " couldn’t sign " << value.getName() << " because <reason>."<< std::endl;
+		uint8_t	rank_missing = getGrade() - value.getGradeToSign();
+		std::cout << _name << " couldn’t sign " << value.getName() << " because " << (int)rank_missing << " rank(s) is missing."<< std::endl;
 	}
 }
 

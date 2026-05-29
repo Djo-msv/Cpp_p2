@@ -10,9 +10,7 @@ int	main(void)
 	
 		val.signForm(For);
 		for (int i = 0; i != 60; i++)
-		{
 			val.decrementGrade();
-		}
 		val.signForm(For);
 		std::cout << "end of try" << std::endl;
 	}

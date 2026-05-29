@@ -1,5 +1,11 @@
 #include "Serialization.hpp"
 
+Serializer::Serializer()
+{}
+
+Serializer::~Serializer()
+{}
+
 uintptr_t Serializer::serialize(Data* ptr)
 {
 	if (!ptr)

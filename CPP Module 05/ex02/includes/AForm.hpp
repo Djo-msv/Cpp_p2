@@ -6,8 +6,8 @@ class AForm
 {
 	public :
 		AForm();
-		AForm(const std::string &name, const uint8_t &gradeToSign, const uint8_t &gradeToExecute);
 		AForm(const AForm &value);
+		AForm(const std::string &name, const uint8_t &gradeToSign, const uint8_t &gradeToExecute);
 		virtual ~AForm();
 
 		std::string getName() const;

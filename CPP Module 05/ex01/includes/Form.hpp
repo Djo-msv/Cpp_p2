@@ -6,6 +6,7 @@ class Form
 {
 	public :
 		Form();
+		Form(const Form &value);
 		Form(const std::string &name, const uint8_t &gradeToSign, const uint8_t &gradeToExecute);
 		~Form();
 
@@ -14,7 +15,9 @@ class Form
 		uint8_t getGradeToSign() const;
 		uint8_t getGradeToExecute() const;
 		
-		void beSigned(Bureaucrat value);
+		void beSigned(Bureaucrat &value);
+
+		Form &operator=(const Form &value);
 
 	private :
 		std::string	_name;

@@ -6,8 +6,8 @@ class PresidentialPardonForm : public AForm
 {
 	public :
 		PresidentialPardonForm();
-		PresidentialPardonForm(const std::string &name);
 		PresidentialPardonForm(const PresidentialPardonForm &value);
+		PresidentialPardonForm(const std::string &name);
 		virtual ~PresidentialPardonForm();
 
 		void execute(Bureaucrat const &executor) const;

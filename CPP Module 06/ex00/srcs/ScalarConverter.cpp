@@ -2,6 +2,12 @@
 #include "printConvert.hpp"
 #include "parsing.hpp"
 
+ScalarConverter::ScalarConverter()
+{}
+
+ScalarConverter::~ScalarConverter()
+{}
+
 void	convert_int(int value)
 {
 	if (value > 128 || value < 0)
@@ -34,7 +40,6 @@ void	convert_float(float value)
 		print_int(static_cast<int>(value));
 	else
 		std::cout << "int: impossible" << std::endl;
-	print_int(static_cast<int>(value));
 	print_float(value);
 	print_double(static_cast<double>(value));
 }

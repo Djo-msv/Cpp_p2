@@ -27,6 +27,10 @@ void	insert(std::vector<Object*> *S, Object *value, size_t i)
 
 	while (begin <= end) {
 		mid = (end - begin) / 2 + begin;
+		if (begin == mid)
+			break ;
+		if(end == mid)
+			break ;
 		if ((*S)[mid]->x == value->x) {
 			S->insert(it + mid, value);
 			return ;
@@ -61,9 +65,9 @@ void	createFordJohnsonSuite(std::vector<Object*> *S, std::vector<Object *> *s)
 		
 		for (; j != 0; j--) { // decrement j until 0
 			if ((*s)[j + k - 1]->isPair)
-				insert(S, (*s)[j + k - 1]->pair.second, j + k - 1);
+				insert(S, (*s)[j + k - 1]->pair.second, j + k);
 			else
-				insert(S, (*s)[j + k - 1]->pair.first, j + k - 2);
+				insert(S, (*s)[j + k - 1]->pair.first, j + k - 1);
 		}
 		k += i;
 	}
@@ -122,8 +126,8 @@ void	pMergeMeSetup(std::vector<long long> *S)
 	pMergeMe(&s);
 
 	// convert s to S
-	for (size_t j = 0; s[j]; j++)
-		(*S)[j] = s[j]->x;
+	for (std::vector<Object*>::iterator it = s.begin(); it != s.end(); it++)
+		(*S)[it - s.begin()] = (*it)->x;
 
 	for (std::vector<Object*>::iterator it = s.begin(); it != s.end(); it++)
 		delete *it;

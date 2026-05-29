@@ -8,4 +8,6 @@ class Data
 		~Data();
 
 		Data &operator=(const Data &value);
+
+		int	_value;
 };

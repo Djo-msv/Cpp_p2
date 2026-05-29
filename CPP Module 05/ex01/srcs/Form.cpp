@@ -3,6 +3,9 @@
 Form::Form(void) : _name("default"), _isSigned(false), _gradeToSign(150), _gradeToExecute(150)
 {}
 
+Form::Form(const Form &value) : _name(value._name), _isSigned(value._isSigned), _gradeToSign(value._gradeToSign), _gradeToExecute(value._gradeToExecute)
+{}
+
 Form::Form(const std::string &name, const uint8_t &gradeToSign, const uint8_t &gradeToExecute) : _name(name), _isSigned(false), _gradeToSign(gradeToSign), _gradeToExecute(gradeToExecute)
 {
 	if (gradeToSign > 150 || gradeToExecute > 150)
@@ -34,7 +37,7 @@ uint8_t Form::getGradeToExecute(void) const
 	return (_gradeToExecute);
 }
 
-void Form::beSigned(Bureaucrat value)
+void Form::beSigned(Bureaucrat &value)
 {
 	if (value.getGrade() <= _gradeToSign)
 		_isSigned = true;
@@ -46,4 +49,10 @@ std::ostream& operator<<(std::ostream& os, const Form& value)
 {
     os << "Form name : " << value.getName() << std::endl << "Is signed : " << value.getSign() << std::endl << "Grade required to sign it : " << (int)value.getGradeToSign() << std::endl << "Grade required to execute it : " << (int)value.getGradeToExecute() << std::endl;
 	return os;
+}
+
+Form &Form::operator=(const Form &value)
+{
+	(void)value;
+	return(*this);
 }

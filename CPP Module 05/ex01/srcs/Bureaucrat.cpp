@@ -3,6 +3,11 @@
 Bureaucrat::Bureaucrat(void)
 {}
 
+Bureaucrat::Bureaucrat(const Bureaucrat &value) : _name(value._name)
+{
+	_grade = value._grade;
+}
+
 Bureaucrat::Bureaucrat(const std::string &name, uint8_t grade) : _name(name)
 {
 	_grade = 150;
@@ -40,7 +45,7 @@ void	Bureaucrat::decrementGrade(void)
 	_grade--;
 }
 
-void	Bureaucrat::signForm(Form value)
+void	Bureaucrat::signForm(Form &value)
 {
 	try
 	{
@@ -57,4 +62,10 @@ std::ostream& operator<<(std::ostream& os, const Bureaucrat& dt)
 {
     os << dt.getName() << ", bureaucrat grade" << dt.getGrade() << '.' << std::endl;
     return os;
+}
+
+Bureaucrat &Bureaucrat::operator=(const Bureaucrat &value)
+{
+	(void) value;
+	return (*this);
 }

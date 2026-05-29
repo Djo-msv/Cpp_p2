@@ -1,9 +1,9 @@
 #include "ShrubberyCreationForm.hpp"
 
-ShrubberyCreationForm::ShrubberyCreationForm(void) : AForm("defaut", 25, 5)
+ShrubberyCreationForm::ShrubberyCreationForm(void) : AForm("defaut", 145, 137)
 {}
 
-ShrubberyCreationForm::ShrubberyCreationForm(const std::string &name) : AForm(name, 25, 5)
+ShrubberyCreationForm::ShrubberyCreationForm(const std::string &name) : AForm(name, 145, 137)
 {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &value) : AForm(value)
