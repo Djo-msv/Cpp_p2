@@ -9,7 +9,6 @@ struct	Object {
 	long long			x;
 	long long			y;
 	std::pair<Object *, Object *>	pair;
-	bool				isPair;
 
 	void	swap();
 };

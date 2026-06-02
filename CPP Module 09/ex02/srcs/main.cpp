@@ -14,12 +14,18 @@ int	main(int argc, char **argv)
 	}
 	std::string				str(argv[1]);
 
-	for (std::string::iterator it = str.begin(); it != str.end(); it++) {
-		if (isdigit(*it))
-			S.push_back(atol(std::string(1, *it).c_str()));
-		else if (*it != ' ') {
+	std::string::iterator it = str.begin();
+	while (true) {
+		if (it != str.end() && isdigit(*it))	
+		S.push_back(atol(std::string(str, it - str.begin()).c_str()));
+		while (it != str.end() && isdigit(*it))
+			it++;
+		if (it == str.end())
+			break ;
+		if (*it == ' ')
+			it++;
+		else
 			return (1);
-		}
 	}
 	pMergeMeSetup(&S);
 	for (std::vector<long long>::iterator it = S.begin(); it != S.end(); it++)

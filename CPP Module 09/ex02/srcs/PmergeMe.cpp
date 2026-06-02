@@ -13,7 +13,9 @@ void	Object::swap(void)
 void	sortPair(std::vector<Object*> *S)
 {
 	for (std::vector<Object*>::iterator it = S->begin(); it != S->end(); it++) {
-		if ((*it)->x < (*it)->y)
+		if ((*it)->pair.second == NULL)
+			(*it)->swap();
+		else if ((*it)->x < (*it)->y)
 			(*it)->swap();
 	}
 }
@@ -40,7 +42,7 @@ void	insert(std::vector<Object*> *S, Object *value, size_t i)
 	}
 	if ((*S)[mid]->x < value->x)
 		S->insert(it + mid + 1, value);
-	if ((*S)[mid]->x > value->x)
+	else if ((*S)[mid]->x > value->x)
 		S->insert(it + mid, value);
 
 }
@@ -51,10 +53,13 @@ void	createFordJohnsonSuite(std::vector<Object*> *S, std::vector<Object *> *s)
 	size_t	j = 0; // actual size
 	size_t	k = 0; // total size
 	size_t	nby = s->size();
+	Object *tmp = NULL;
 
+	if (S->back()->pair.first == NULL && S->back()->pair.second != NULL)
+		tmp = S->back();
 	S->clear();
 	for (std::vector<Object*>::iterator it = s->begin(); it != s->end(); it++) {
-		if ((*it)->isPair)
+		if ((*it)->pair.first)
 			S->push_back((*it)->pair.first);
 	}
 	for (size_t iterator = 1; k < nby; iterator++) {
@@ -64,13 +69,13 @@ void	createFordJohnsonSuite(std::vector<Object*> *S, std::vector<Object *> *s)
 		i = j;
 		
 		for (; j != 0; j--) { // decrement j until 0
-			if ((*s)[j + k - 1]->isPair)
-				insert(S, (*s)[j + k - 1]->pair.second, j + k);
-			else
-				insert(S, (*s)[j + k - 1]->pair.first, j + k - 1);
+			if ((*s)[j + k - 1]->pair.second)
+				insert(S, (*s)[j + k - 1]->pair.second, j + k + 1);
 		}
 		k += i;
 	}
+	if (tmp != NULL)
+		S->push_back(tmp);
 }
 
 void	pMergeMe(std::vector<Object*> *S)
@@ -81,6 +86,8 @@ void	pMergeMe(std::vector<Object*> *S)
 
 	// put an alfe inside x, and other alfe inside y, if 1 remain, put inside y
 	for (std::vector<Object*>::iterator it = S->begin(); it != S->end(); it++) {
+		if ((*it)->pair.first == NULL && (*it)->pair.second != NULL)
+			continue ;
 		if ((it - S->begin()) % 2 == 0) {
 			Object *tmp = new Object;
 			tmp->pair.first = *it;
@@ -90,16 +97,16 @@ void	pMergeMe(std::vector<Object*> *S)
 		else
 		{
 			s[j]->pair.second = *it;
-			s[j]->y = (*it)->x;
-			s[j++]->isPair = true;
+			s[j++]->y = (*it)->x;
 		}
 	}
+
 	
 	// sort pair to make x > y;
 	sortPair(&s);
 
 	// recurisivity. so x is sorted
-	if (s.size() > 1)
+	if (S->size() / 2 > 1)
 		pMergeMe(&s);
 
 	// insertion of y inside x, and put result insde S
@@ -115,7 +122,8 @@ void	pMergeMeSetup(std::vector<long long> *S)
 
 	// convert S to s
 	
-
+	if (S->size() <= 1)
+		return ;
 	for (std::vector<long long>::iterator it = S->begin(); it != S->end(); it++) {
 		Object *tmp = new Object;
 		tmp->x = *it;
