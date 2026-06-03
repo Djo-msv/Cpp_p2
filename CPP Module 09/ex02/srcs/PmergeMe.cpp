@@ -29,22 +29,34 @@ void	insert(std::vector<Object*> *S, Object *value, size_t i)
 
 	while (begin <= end) {
 		mid = (end - begin) / 2 + begin;
-		if (begin == mid)
-			break ;
-		if(end == mid)
-			break ;
 		if ((*S)[mid]->x == value->x) {
 			S->insert(it + mid, value);
 			return ;
 		}
+		if (begin == mid)
+			break ;
+		if (end == mid)
+			break ;
 		else 
 			((*S)[mid]->x > value->x)? end = mid - 1: begin = mid + 1;
 	}
-	if ((*S)[mid]->x < value->x)
+	if (((*S)[end]->x < value->x)) {
+		S->insert(it + end + 1, value);
+		return ;
+	}
+	if (((*S)[begin]->x > value->x)) {
+		S->insert(it + begin, value);
+		return ;
+	}
+	if ((*S)[mid]->x < value->x) {
 		S->insert(it + mid + 1, value);
-	else if ((*S)[mid]->x > value->x)
+		return ;
+	}
+	else if ((*S)[mid]->x > value->x) {
 		S->insert(it + mid, value);
-
+		return ;
+	}
+	std::cout << "error" << std::endl;
 }
 
 void	createFordJohnsonSuite(std::vector<Object*> *S, std::vector<Object *> *s)
@@ -70,7 +82,7 @@ void	createFordJohnsonSuite(std::vector<Object*> *S, std::vector<Object *> *s)
 		
 		for (; j != 0; j--) { // decrement j until 0
 			if ((*s)[j + k - 1]->pair.second)
-				insert(S, (*s)[j + k - 1]->pair.second, j + k + 1);
+				insert(S, (*s)[j + k - 1]->pair.second, i + k);
 		}
 		k += i;
 	}
