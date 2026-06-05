@@ -23,40 +23,30 @@ void	sortPair(std::vector<Object*> *S)
 void	insert(std::vector<Object*> *S, Object *value, size_t i)
 {
 	size_t	begin = 0;
-	size_t	end = i;
 	size_t	mid;
-	std::vector<Object*>::iterator it = S->begin();
+	size_t	end = i;
+	std::vector<Object*>::iterator start = S->begin();
 
-	while (begin <= end) {
+	while (true) {
 		mid = (end - begin) / 2 + begin;
 		if ((*S)[mid]->x == value->x) {
-			S->insert(it + mid, value);
+			S->insert(start + mid, value);
 			return ;
 		}
-		if (begin == mid)
-			break ;
-		if (end == mid)
-			break ;
-		else 
-			((*S)[mid]->x > value->x)? end = mid - 1: begin = mid + 1;
+		if (end - begin <= 1)
+			break;
+		((*S)[mid]->x > value->x)? end = mid - 1: begin = mid + 1;
 	}
-	if (((*S)[end]->x < value->x)) {
-		S->insert(it + end + 1, value);
-		return ;
-	}
-	if (((*S)[begin]->x > value->x)) {
-		S->insert(it + begin, value);
-		return ;
-	}
-	if ((*S)[mid]->x < value->x) {
-		S->insert(it + mid + 1, value);
-		return ;
-	}
-	else if ((*S)[mid]->x > value->x) {
-		S->insert(it + mid, value);
-		return ;
-	}
-	std::cout << "error" << std::endl;
+	if ((*S)[begin]->x > value->x)
+		S->insert(start + begin, value);
+	else if ((*S)[end]->x < value->x)
+		S->insert(start + end + 1, value);
+	else if ((*S)[mid]->x > value->x)
+		S->insert(start + mid, value);
+	else if ((*S)[mid]->x < value->x)
+		S->insert(start + mid + 1, value);
+	else
+		std::cout << "wtf ?!!" << std::endl;
 }
 
 void	createFordJohnsonSuite(std::vector<Object*> *S, std::vector<Object *> *s)
@@ -64,6 +54,7 @@ void	createFordJohnsonSuite(std::vector<Object*> *S, std::vector<Object *> *s)
 	size_t	i = 0; // perv size
 	size_t	j = 0; // actual size
 	size_t	k = 0; // total size
+	size_t	count = 0;
 	size_t	nby = s->size();
 	Object *tmp = NULL;
 
@@ -81,8 +72,11 @@ void	createFordJohnsonSuite(std::vector<Object*> *S, std::vector<Object *> *s)
 		i = j;
 		
 		for (; j != 0; j--) { // decrement j until 0
-			if ((*s)[j + k - 1]->pair.second)
-				insert(S, (*s)[j + k - 1]->pair.second, i + k);
+			if ((*s)[j + k - 1]->pair.first)
+				insert(S, (*s)[j + k - 1]->pair.second, count + j + k - 1);
+			else
+				insert(S, (*s)[j + k - 1]->pair.second, S->size() - 1);
+			count++;
 		}
 		k += i;
 	}
@@ -95,11 +89,14 @@ void	pMergeMe(std::vector<Object*> *S)
 	std::vector<Object *>	s;
 
 	size_t j = 0;
+	size_t	size = S->size();
 
 	// put an alfe inside x, and other alfe inside y, if 1 remain, put inside y
 	for (std::vector<Object*>::iterator it = S->begin(); it != S->end(); it++) {
-		if ((*it)->pair.first == NULL && (*it)->pair.second != NULL)
+		if ((*it)->pair.first == NULL && (*it)->pair.second != NULL) {
+			size -= 1;
 			continue ;
+		}
 		if ((it - S->begin()) % 2 == 0) {
 			Object *tmp = new Object;
 			tmp->pair.first = *it;
@@ -118,7 +115,7 @@ void	pMergeMe(std::vector<Object*> *S)
 	sortPair(&s);
 
 	// recurisivity. so x is sorted
-	if (S->size() / 2 > 1)
+	if (size / 2 > 1)
 		pMergeMe(&s);
 
 	// insertion of y inside x, and put result insde S
