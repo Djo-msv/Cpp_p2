@@ -2,24 +2,19 @@
 
 #include "MutantStack.hpp"
 
-template <typename T>
-MutantStack<T>::MutantStack(void)
+#include <iostream>
+#include <stack>
+
+
+template<typename T, typename Container>
+MutantStack<T, Container>::MutantStack(void) : std::stack<T, Container>() 
 {}
 
-MutantStack(const MutantStack &value)
-{
-	*this = value;
-}
-
-~MutantStack(void)
+template<typename T, typename Container>
+MutantStack<T, Container>::MutantStack(const MutantStack &value) : std::stack<T, Container>(value)
 {}
 
-iterator begin()
-{
-	return (this->c.begin());
-}
+template<typename T, typename Container>
+MutantStack<T, Container>::~MutantStack(void)
+{}
 
-iterator end()
-{
-	return (this->c.end());
-}

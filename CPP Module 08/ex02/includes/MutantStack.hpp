@@ -9,8 +9,9 @@ class MutantStack : public std::stack<T, Container>
 	public :
 		typedef typename std::deque<T>::iterator iterator;
 
-		MutantStack(void) : std::stack<T, Container>() {}
-		virtual ~MutantStack(void) {}
+		MutantStack(void);
+		MutantStack(const MutantStack &value);
+		virtual ~MutantStack(void);
 
 		typename Container::iterator    begin(void) {
 			return (this->c.begin());
@@ -21,3 +22,4 @@ class MutantStack : public std::stack<T, Container>
 		}
 };
 
+#include "MutantStack.tpp"

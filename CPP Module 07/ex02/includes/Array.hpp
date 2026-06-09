@@ -1,17 +1,18 @@
 #pragma once
 
 #include <iostream>
+#include <stdlib.h>
 #include <stdexcept>
 
 template <typename T> class Array 
 {
 	public :
 		Array();
-		Array(unsigned int n);
+		Array(const unsigned int n);
 		Array(const Array &value);
 		~Array();
 
-		unsigned int size();
+		unsigned int size() const;
 
 		T& operator[](unsigned int);
 		const T& operator[](unsigned int) const;

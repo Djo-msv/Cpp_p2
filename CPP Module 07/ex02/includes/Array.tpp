@@ -7,12 +7,14 @@ Array<T>::Array(void) : _array(new T[0]), _size(0)
 {}
 
 template <typename T>
-Array<T>::Array(unsigned int n) : _array(new T[n]), _size(n)
+Array<T>::Array(const unsigned int n) : _array(new T[n]), _size(n)
 {}
 
 template <typename T>
-Array<T>::Array(const Array &value) : Array(value.size())
+Array<T>::Array(const Array &value)
 {
+	_size = value.size();
+	_array = new T[_size];
 	for (unsigned int i = 0; i != value.size(); i++)
 		_array[i] = value[i];
 }
@@ -24,7 +26,7 @@ Array<T>::~Array()
 }
 
 template <typename T>
-unsigned int	Array<T>::size(void)
+unsigned int	Array<T>::size(void) const
 {
 	return (_size);
 }
@@ -41,7 +43,7 @@ T &Array<T>::operator[](unsigned int i)
 template <typename T>
 const T &Array<T>::operator[](unsigned int i) const
 {
-	if (i >= _size)
+	if (i >= _size || i < 0)
 		throw(std::out_of_range("out of bounds"));
 	else
 		return (_array[i]);

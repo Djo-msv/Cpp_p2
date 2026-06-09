@@ -1,13 +1,24 @@
 #pragma once
 
 #include <iostream>
+#include <algorithm>
 
-template <typename T> int &easyfind(T *containers, int integer)
+template <typename T>
+typename T::const_iterator easyfind(const T& containers, const int integer)
 {
-	for (size_t i = 0; i != containers->size(); i++)
-	{
-		if ((*containers)[i] == integer)
-			return ((*containers)[i]);
-	}
-	throw (std::exception());
-}
+	typename T::const_iterator	it = std::find(containers.begin(), containers.end(), integer);
+	if (it == containers.end())
+		throw (std::exception());
+
+	return it;
+};
+
+template <typename T>
+typename T::iterator easyfind(T& containers, int integer)
+{
+	typename T::iterator	it = std::find(containers.begin(), containers.end(), integer);
+	if (it == containers.end())
+		throw (std::exception());
+
+	return it;
+};

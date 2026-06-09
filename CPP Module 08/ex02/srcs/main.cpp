@@ -20,8 +20,10 @@ int	main(void)
 	mstack.push(7);
 	mstack.push(56);
 
-	MutantStack<int>::iterator it = mstack.begin();
-	MutantStack<int>::iterator ite = mstack.end();
+	MutantStack<int> cpy(mstack);
+
+	MutantStack<int>::iterator it = cpy.begin();
+	MutantStack<int>::iterator ite = cpy.end();
 
 	++it;
 	--it;
